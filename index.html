@@ -1,4 +1,4 @@
-<!--Made by Askedland youtube.com/@askedland-->
+<!--Made by Askedland https://youtube.com/@askedland-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +9,7 @@
   </head>
   <!--add a login screen which will dispear after pressing login-->
   <!--add a background for better looks for the blocky version windows 10 simulation-->
-  <div class="loginscreen" style="background-color: #ADD8E6; width: max; height: max;" id="logindiv">
+  <div class="loginscreen" style="background-color: #ADD8E6; width: 100vw; height: 100vh;" id="logindiv">
     <!--add the name "User"-->
     <h2 style="text-align: center;  margin-top: 277px">User</h2>
     <!--adding a button-->
@@ -17,50 +17,230 @@
     <button onclick="login()" style="background: #D3D3D3; color: black; border: white; align-items: center; display: block; margin: 15 auto 0 auto; padding: 10px 16px;">Log In</button>
     </div>
   </div>
-  <div class="desktop" id="desktopdiv" style="display: none;">
-    <img src="/assets/images/trash.png" style="width: 43px; height: 43px; display: block;" onclick="showTrash()">
- <h5 style="margin: 0;" onclick="showTrash()">Trash Bin</h5>
+  <div class="desktop" id="desktopdiv" style="display: none; position: relative; height: 100vh;">
+    <div id="trashid" style="position: absolute; top: 20px; left: 20px; text-align: center; display: inline-block;">
+      <img src="/assets/images/trash.png" style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;" ondblclick="showTrash()">
+      <h5 style="margin: 0; cursor: pointer;" ondblclick="showTrash()">Trash Bin</h5>
     </div>
-  <div class="trash" id="trashdiv" style="display: none; border: 2px; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <h4 id="trashexit" onclick="exitTrash()" style="text-align: right;">X</h4>
+    <div class="settings" id="settingsdiv" style="position: absolute; top: 110px; left: 24px; text-align: center; display: inline-block;">
+  <img src="/assets/images/settings" ondblclick="showSettings()"style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;">
+  <h5 style="margin: 0; cursor: pointer;" ondblclick="showSettings()">Settings</h5>
+    </div>
+    <div class="sttngs" id="settingsid" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+      <h4 id="settingsexit">X</h4>
+      <h5>This isnt a feature</h5>
+    </div>
+  </div>
+  <div class="trash" id="trashdiv" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+    <h4 id="trashexit" onclick="exitTrash()" style="text-align: right; cursor: pointer;">X</h4>
     <h5>Trash bin is empty</h5>
   </div>
- <div class="taskbar" id="taskbardiv" style="position: fixed; bottom: 0; left: 0; background: #202020; height: 40px; width: 100%; display: none; align-items: center; padding: 0 10px; box-sizing: border-box;">
+ <div class="taskbar" id="taskbardiv" style="position: fixed; bottom: 0; left: 0; background: #202020; height: 40px; width: 100%; display: none; align-items: center; padding: 0 10px; box-sizing: border-box; z-index: 9999;">
   <img src="/assets/images/windowslogo.png" id="windowslogo" style="display:none; width: 24px; height: 24px; cursor: pointer;" onclick="showmenu()">
 </div>
 <div class="menu" id="menudiv" style="display: none; position: fixed; bottom: 40px; left: 0; background: #202020; color: white; width: 300px; height: 400px; padding: 15px; box-sizing: border-box; font-family: sans-serif; border-top-right-radius: 4px; border: 1px solid #3a3a3a; z-index: 9999;">
-  <h3 style="margin: 0; font-size: 14px; font-weight: normal; color: #cccccc;">oops! this is not a feature yet...</h3>
+  <h3 style="margin: 0; font-size: 14px; font-weight: normal; color: #cccccc;">
+    <img src="/assets/images/trash.png" onclick="showTrash()">
+  </h3>
+  <h3 class="logout" onclick="logOut()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 15px; margin: 0; cursor: pointer;">/</h3>
 </div>
+<div class="loggingoutscreen" id="loggingoutscreendiv" style="text-align: center; display: none;">
+<h3>Logging out please wait...</h3>
+</div>
+<style>
+   .draggable-window {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 150px;
+      height: 120px;
+      background-color: #2980b9;
+      color: white;
+      font-family: sans-serif;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      user-select: none; 
+   }
+</style>
   <script>
   function login(){
-  document.getElementById('logindiv')
-    .style.display='none';   
-     document.getElementById('desktopdiv')
-    .style.display='block';
-    document.getElementById('taskbardiv')
-    .style.display='block';
-    document.getElementById('windowslogo')
-    .style.display="block";
+    document.getElementById('logindiv').style.display='none';   
+    document.getElementById('desktopdiv').style.display='block';
+    document.getElementById('taskbardiv').style.display='block';
+    document.getElementById('windowslogo').style.display="block";
+    
   }
   function showTrash(){
-    document.getElementById('trashdiv')
-    .style.display='block';
-  }
+    document.getElementById('trashdiv').style.display='block';
+    document.getElementById('menudiv').style.display="none";
+      
+      }
   function exitTrash(){
-    document.getElementById('trashdiv')
-    .style.display='none'
+    document.getElementById('trashdiv').style.display='none'
   }
   function showmenu(){
-    document.getElementById('menudiv')
-    .style.display="block"
-  }   
-   function showmenu(){
     var menu = document.getElementById('menudiv');
     if (menu.style.display === "block") {
       menu.style.display = "none";
     } else {
       menu.style.display = "block";
     }
-  }   
-      </script>
+  } 
+  function showSettings(){
+    document.getElementById('settingsid')
+  }
+   function logOut(){
+      document.getElementById('loggingoutscreendiv').style.display='block';
+      document.getElementById('desktopdiv').style.display='none';
+      document.getElementById('taskbardiv').style.display='none';
+      document.getElementById('windowslogo').style.display='none';
+      document.getElementById('menudiv').style.display='none';
+      setTimeout(function() { 
+        document.getElementById('loggingoutscreendiv').style.display = 'none';
+        document.getElementById('logindiv').style.display = 'block';
+      }, 3000); 
+    } 
+           
+    dragElement(document.getElementById("trashid"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    dragElement(document.getElementById("trashdiv"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    dragElement(document.getElementById("settingsdiv"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+        dragElement(document.getElementById("settingsid"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
+  </script>
 </html>
