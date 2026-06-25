@@ -1,3 +1,4 @@
+
 <!--Made by Askedland https://youtube.com/@askedland-->
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,10 @@
   </head>
   <!--add a login screen which will dispear after pressing login-->
   <!--add a background for better looks for the blocky version windows 10 simulation-->
-  <div class="loginscreen" style="background-color: #ADD8E6; width: 100vw; height: 100vh;" id="logindiv">
+  <div class="loading" id="loadingscreen" style="display: block; background-color: black; height: 100%  width: 100vw; height: 100vh;">
+    <h1 style="color: white; text-align: center; margin: 277px">Loading Windows...</h1>
+  </div>
+  <div class="loginscreen" style="background-color: #ADD8E6; width: 100vw; height: 100vh; display: none;" id="logindiv">
     <!--add the name "User"-->
     <h2 style="text-align: center;  margin-top: 277px">User</h2>
     <!--adding a button-->
@@ -27,9 +31,13 @@
   <h5 style="margin: 0; cursor: pointer;" ondblclick="showSettings()">Settings</h5>
     </div>
     <div class="sttngs" id="settingsid" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
-      <h4 id="settingsexit">X</h4>
-      <h5>This isnt a feature</h5>
+      <h4 id="settingsexit" style="text-align: right; cursor: pointer;" onclick="exitSettings()">X</h4>
+      <h2 style="color: red;">Error! Unable to load functionality as its not available.</h2>
+  <div style="position: absolute; top: 40px; left: 30px; font-weight: bold; font-size: 16px;">User</div>
+  <div style="position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-weight: bold; font-size: 16px; white-space: nowrap;">user@example.com
+  </div>
     </div>
+    <hr style="display: none;" id="line1">
   </div>
   <div class="trash" id="trashdiv" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
     <h4 id="trashexit" onclick="exitTrash()" style="text-align: right; cursor: pointer;">X</h4>
@@ -61,8 +69,31 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       user-select: none; 
    }
+     html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; 
+        box-sizing: border-box;
+     }
+     .logindiv, .loadingscreen {
+        background-color: #ADD8E6; 
+        width: 100vw; 
+        height: 100vh; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;
+      }
+
 </style>
   <script>
+      setTimeout(function() { 
+        document.getElementById('loadingscreen').style.display = 'none';
+        document.getElementById('logindiv').style.display = 'block';
+      }, 3000); 
+
   function login(){
     document.getElementById('logindiv').style.display='none';   
     document.getElementById('desktopdiv').style.display='block';
@@ -87,7 +118,12 @@
     }
   } 
   function showSettings(){
-    document.getElementById('settingsid')
+    document.getElementById('settingsid').style.display='block'
+    document.getElementById('line1').style.display='block'
+  }
+  function exitSettings(){
+    document.getElementById('settingsid').style.display='none'
+    document.getElementById('line1').style.display='none'
   }
    function logOut(){
       document.getElementById('loggingoutscreendiv').style.display='block';
