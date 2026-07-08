@@ -1,13 +1,23 @@
 
+
 <!--Made by Askedland https://youtube.com/@askedland-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+data-win10-pub="Askedland"
+data-current-version="1.8.2"
+data-og-pub="Askedland"
+data-html-ver="HTML5">
+<!--These scripts which are sourced at assets/javascript may not be finished -->
+<script src="/assets/javascript/copyright.js"></script>
+<script src="/assets/javascript/welcomer.js"></script>
   <head>
     <meta name="author" content="Askedland, https://youtube.com/@askedland askedland_ on discord">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows 10 Simulator</title>
   </head>
+  <body id="internals" style="background-color: white;">
+  <!--I will not be adding a shutdown button for a while-->
   <!--add a login screen which will dispear after pressing login-->
   <!--add a background for better looks for the blocky version windows 10 simulation-->
   <div class="loading" id="loadingscreen" style="display: block; background-color: black; height: 100%  width: 100vw; height: 100vh;">
@@ -32,7 +42,9 @@
     </div>
     <div class="sttngs" id="settingsid" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
       <h4 id="settingsexit" style="text-align: right; cursor: pointer;" onclick="exitSettings()">X</h4>
-      <h2 style="color: red;">Error! Unable to load functionality as its not available.</h2>
+      <h6 id="resetBack" style="color: black; text-align: left; cursor: pointer; display: none;" onclick="resetbacktoFactory()">Reset Back to factory</h6>|
+      <h6 id="resetComplete" style="display: none; text-align: left;">Reset Complete</h6>
+      <button style="background-color: red; height: 52px; width: 82px; cursor: pointer;" onclick="backgroundRed()">   </button>
   <div style="position: absolute; top: 40px; left: 30px; font-weight: bold; font-size: 16px;">User</div>
   <div style="position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-weight: bold; font-size: 16px; white-space: nowrap;">user@example.com
   </div>
@@ -48,8 +60,8 @@
 </div>
 <div class="menu" id="menudiv" style="display: none; position: fixed; bottom: 40px; left: 0; background: #202020; color: white; width: 300px; height: 400px; padding: 15px; box-sizing: border-box; font-family: sans-serif; border-top-right-radius: 4px; border: 1px solid #3a3a3a; z-index: 9999;">
   <h3 style="margin: 0; font-size: 14px; font-weight: normal; color: #cccccc;">
-    <img src="/assets/images/trash.png" onclick="showTrash()">
-    <img src="/assets/images/settings.png" onclick="showSettings()">
+    <img src="/assets/images/trash.png" style="height: 35px; width: auto;" onclick="showTrash()">
+    <img src="/assets/images/settings.png" style="height: 35px; width: auto;" onclick="showSettings()">
   </h3>
   <h3 class="logout" onclick="logOut()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 15px; margin: 0; cursor: pointer;">/</h3>
 </div>
@@ -136,7 +148,20 @@
         document.getElementById('loggingoutscreendiv').style.display = 'none';
         document.getElementById('logindiv').style.display = 'block';
       }, 3000); 
+    }
+    function backgroundRed(){
+      document.getElementById('internals').style.backgroundColor = 'red';
+      document.getElementById('resetBack').style.display = 'block';
     } 
+
+    function resetbacktoFactory(){
+      document.getElementById('resetBack').style.display = 'none';
+      document.getElementById('internals').style.backgroundColor = 'white';
+      document.getElementById('resetComplete').style.display = 'block';
+           setTimeout(function() { 
+        document.getElementById('resetComplete').style.display = 'none';
+      }, 375);
+    }
            
     dragElement(document.getElementById("trashid"));
     function dragElement(elmnt) {
@@ -280,4 +305,5 @@
     }
 
   </script>
+  </head>
 </html>
