@@ -1,5 +1,3 @@
-
-
 <!--Made by Askedland https://youtube.com/@askedland-->
 <!DOCTYPE html>
 <html lang="en"
@@ -22,6 +20,9 @@ data-html-ver="HTML5">
   <!--add a background for better looks for the blocky version windows 10 simulation-->
   <div class="loading" id="loadingscreen" style="display: block; background-color: black; height: 100%  width: 100vw; height: 100vh;">
     <h1 style="color: white; text-align: center; margin: 277px">Loading Windows...</h1>
+    <noscript style="text-align: center;">
+      Javascript is disabled, please enable javascript to run this application
+    </noscript>
   </div>
   <div class="loginscreen" style="background-color: #ADD8E6; width: 100vw; height: 100vh; display: none;" id="logindiv">
     <!--add the name "User"-->
@@ -45,6 +46,7 @@ data-html-ver="HTML5">
       <h6 id="resetBack" style="color: black; text-align: left; cursor: pointer; display: none;" onclick="resetbacktoFactory()">Reset Back to factory</h6>|
       <h6 id="resetComplete" style="display: none; text-align: left;">Reset Complete</h6>
       <button style="background-color: red; height: 52px; width: 82px; cursor: pointer;" onclick="backgroundRed()">   </button>
+      <button style="background-color: orange; height: 52px; width: 82px; cursor: pointer" onclick="backgroundOrange()">   </button>
   <div style="position: absolute; top: 40px; left: 30px; font-weight: bold; font-size: 16px;">User</div>
   <div style="position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-weight: bold; font-size: 16px; white-space: nowrap;">user@example.com
   </div>
@@ -151,6 +153,10 @@ data-html-ver="HTML5">
     }
     function backgroundRed(){
       document.getElementById('internals').style.backgroundColor = 'red';
+      document.getElementById('resetBack').style.display = 'block';
+    } 
+     function backgroundOrange(){
+      document.getElementById('internals').style.backgroundColor = 'orange';
       document.getElementById('resetBack').style.display = 'block';
     } 
 
