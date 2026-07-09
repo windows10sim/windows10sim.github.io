@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en"
 data-win10-pub="Askedland"
-data-current-version="1.8.2"
+data-current-version="1.9.3"
 data-og-pub="Askedland"
 data-html-ver="HTML5">
 <!--These scripts which are sourced at assets/javascript may not be finished -->
@@ -18,12 +18,52 @@ data-html-ver="HTML5">
   <!--I will not be adding a shutdown button for a while-->
   <!--add a login screen which will dispear after pressing login-->
   <!--add a background for better looks for the blocky version windows 10 simulation-->
+  <!--
+
+
+
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||Updated on 09.07 21:13:23|||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+||||||||Version: 1.9.3|||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||Version Codename||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||CodeName: BetterLessEqual|||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||License|||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+||||||GNUPUBLICLICNSE3.0|||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+||||||||||Hosting||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+||||||||Github Pages|||||||||||
+|||||||||||||||||||||||||||||||
+
+  
+  -->
   <div class="loading" id="loadingscreen" style="display: block; background-color: black; height: 100%  width: 100vw; height: 100vh;">
     <h1 style="color: white; text-align: center; margin: 277px">Loading Windows...</h1>
-    <noscript style="text-align: center; color: white;">
-      Javascript is disabled, please enable javascript to run this application
-    </noscript>
   </div>
+  <div class="shutdownclass" id="shutdownId" style="display: none; background-color: blue; height: 100%  width: 100vw; height: 100vh;">
+    <h1 style="color: white; text-align: center; margin: 277px">Shutting down please wait...</h1>
+  </div>
+  <div class="osshutdown" id="systemhasshutDown" style="text-align: center; justify-items: center; display: none;">
+    <h2 style="text-align: center;">The system has been shutdown</h2>
+    <button onclick="turnOn()" style="">Turn On</button>
+  </div>
+  <noscript style="text-align: center; color: white;">
+    Javascript is disabled, please enable javascript to run this application
+  </noscript>
   <div class="loginscreen" style="background-color: #ADD8E6; width: 100vw; height: 100vh; display: none;" id="logindiv">
     <!--add the name "User"-->
     <h2 style="text-align: center;  margin-top: 277px">User</h2>
@@ -66,6 +106,7 @@ data-html-ver="HTML5">
     <img src="/assets/images/settings.png" style="height: 35px; width: auto;" onclick="showSettings()">
   </h3>
   <h3 class="logout" onclick="logOut()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 15px; margin: 0; cursor: pointer;">/</h3>
+  <h3 class="shutdown" onclick="shutDown()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 23px; margin: 0; cursor: pointer;">0</h3>
 </div>
 <div class="loggingoutscreen" id="loggingoutscreendiv" style="text-align: center; display: none;">
 <h3>Logging out please wait...</h3>
@@ -150,6 +191,16 @@ data-html-ver="HTML5">
         document.getElementById('loggingoutscreendiv').style.display = 'none';
         document.getElementById('logindiv').style.display = 'block';
       }, 3000); 
+    }
+    function shutDown(){
+      document.getElementById('shutdownId').style.display='block';
+      document.getElementById('desktopdiv').style.display='none';
+      document.getElementById('taskbardiv').style.display='none';
+      document.getElementById('windowslogo').style.display='none';
+      document.getElementById('menudiv').style.display='none';
+            setTimeout(function() { 
+        document.getElementById('shutdownId').style.display = 'none';
+      }, 3000); setTimeout(function(){document.getElementById('systemhasshutDown').style.display='block';}, 275);
     }
     function backgroundRed(){
       document.getElementById('internals').style.backgroundColor = 'red';
