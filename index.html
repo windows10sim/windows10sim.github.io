@@ -1,3 +1,4 @@
+
 <!--Made by Askedland https://youtube.com/@askedland-->
 <!DOCTYPE html>
 <html lang="en"
@@ -28,7 +29,7 @@ data-html-ver="HTML5">
 |||Updated on 09.07 21:30:56|||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
-||||||||Version: 2.3.2|||||||||
+||||||||Version: 2.4.6|||||||||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
 |||||||Version Codename||||||||
@@ -83,6 +84,10 @@ data-html-ver="HTML5">
   <img src="/assets/images/settings.png" ondblclick="showSettings()"style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;">
   <h5 style="margin: 0; cursor: pointer;" ondblclick="showSettings()">Settings</h5>
     </div>
+    <div class="notepad" id="notepaddiv" style="position: absolute; top: 199px; left: 24px; text-align: center; display: inline-block;">
+      <img src="/assets/images/notepad.png" ondblclick="showNotepad()" style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;">
+      <h5 style="margin: 0; cursor: pointer;" ondblclick="showNotepad()">Notepad</h5>
+    </div>
     <div class="sttngs" id="settingsid" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
       <h4 id="settingsexit" style="text-align: right; cursor: pointer;" onclick="exitSettings()">X</h4>
       <h6 id="resetBack" style="color: black; text-align: left; cursor: pointer; display: none;" onclick="resetbacktoFactory()">Reset Back to factory</h6>|
@@ -98,6 +103,11 @@ data-html-ver="HTML5">
   <div class="trash" id="trashdiv" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
     <h4 id="trashexit" onclick="exitTrash()" style="text-align: right; cursor: pointer;">X</h4>
     <h5>Trash bin is empty</h5>
+  </div>
+  <div class="notepad" id="notePad" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+    <h4 id="exitNotepad" onclick="exitNotepad()" style="text-align: right; cursor: pointer;">X</h4>
+    <textarea placeholder="Start typing..." style="flex: 1; padding: 15px; font-size: 16px; font-family: monospace; border: none; outline: none; resize: none; border-radius: 4px; box-sizing: border-box; background: white;"></textarea>
+</div>
   </div>
  <div class="taskbar" id="taskbardiv" style="position: fixed; bottom: 0; left: 0; background: #202020; height: 40px; width: 100%; display: none; align-items: center; padding: 0 10px; box-sizing: border-box; z-index: 9999;">
   <img src="/assets/images/windowslogo.png" id="windowslogo" style="display:none; width: 24px; height: 24px; cursor: pointer;" onclick="showmenu()">
@@ -164,11 +174,19 @@ data-html-ver="HTML5">
     document.getElementById('menudiv').style.display="none";
       
       }
+  function exitNotepad(){
+   document.getElementById('notePad').style.display = 'none';
+  }
   function exitTrash(){
     document.getElementById('trashdiv').style.display='none'
   }
   function turnOn(){
 document.getElementById('loadingscreen').style.display = 'block';
+setTimeout(function(){
+  document.getElementById('loadingscreen').style.display = 'none';
+  document.getElementById('shutdownId').style.display = 'none';
+  document.getElementById('logindiv').style.display = 'block';
+}, 3000);
   }
   function showmenu(){
     var menu = document.getElementById('menudiv');
@@ -179,12 +197,15 @@ document.getElementById('loadingscreen').style.display = 'block';
     }
   } 
   function showSettings(){
-    document.getElementById('settingsid').style.display='block'
-    document.getElementById('line1').style.display='block'
+    document.getElementById('settingsid').style.display='block';
+    document.getElementById('line1').style.display='block';
   }
   function exitSettings(){
-    document.getElementById('settingsid').style.display='none'
-    document.getElementById('line1').style.display='none'
+    document.getElementById('settingsid').style.display='none';
+    document.getElementById('line1').style.display='none';
+  }
+  function showNotepad(){
+    document.getElementById('notePad').style.display = 'block';
   }
    function logOut(){
       document.getElementById('loggingoutscreendiv').style.display='block';
@@ -365,7 +386,76 @@ document.getElementById('loadingscreen').style.display = 'block';
         document.onmousemove = null;
       }
     }
+ dragElement(document.getElementById("notepaddiv"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
 
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    dragElement(document.getElementById("notePad"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
   </script>
   </head>
 </html>
