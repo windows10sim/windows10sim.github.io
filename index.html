@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en"
 data-win10-pub="Askedland"
-data-current-version="1.9.3"
+data-current-version="2.7.2"
 data-og-pub="Askedland"
 data-html-ver="HTML5">
 <!--These scripts which are sourced at assets/javascript may not be finished -->
@@ -15,8 +15,8 @@ data-html-ver="HTML5">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows 10 Simulator</title>
   </head>
-  <body id="internals" style="background-color: white;">
-  <!--The shutdown feature is experimental, and may bug out-->
+  <body id="internals" style="background-color: black">
+  <!--The notepad is a experimental feature currently its not working-->
   <!--add a login screen which will dispear after pressing login-->
   <!--add a background for better looks for the blocky version windows 10 simulation-->
   <!--
@@ -29,7 +29,7 @@ data-html-ver="HTML5">
 |||Updated on 09.07 21:30:56|||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
-||||||||Version: 2.4.6|||||||||
+||||||||Version: 2.7.2|||||||||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
 |||||||Version Codename||||||||
@@ -64,6 +64,13 @@ data-html-ver="HTML5">
     <h2 style="text-align: center;">The system has been shutdown</h2>
     <button onclick="turnOn()">Turn On</button>
   </div>
+  <div class="goingtohibernate" id="hibernatehi" style="display: none; background-color: blue; height: 100%  width: 100vw; height: 100vh;">
+    <h1 style="color: white; text-align: center; margin: 277px">Going into hibernation please wait...</h1>
+  </div>
+  <div class="oshibernation" id="hibernationmode" style="text-align: center; justify-items: center; display: none;">
+    <h2>System has been set in Hibernation mode</h2>
+    <button onclick="nohibernation()">Turn on</button>
+  </div>
   <noscript style="text-align: center; color: white;">
     Javascript is disabled, please enable javascript to run this application
   </noscript>
@@ -74,6 +81,17 @@ data-html-ver="HTML5">
     <div class="logonbutton" style="display: flex; justify-content: center;">
     <button onclick="login()" style="background: #D3D3D3; color: black; border: white; align-items: center; display: block; margin: 15 auto 0 auto; padding: 10px 16px;">Log In</button>
     </div>
+  </div>
+  <div class="addedfeatures" id="newfeatures" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; height: 300px;  overflow-y: auto; overflow-x: hidden;">
+    <button onclick="closefeaturesandfixes()" style="background-color: gray; border: none; margin-left: 320px;">X</button>
+    <h1>Features and Fixes</h1>
+    <h2>4th Sept. 2026</h3>
+    <h3>Hibernation mode is currently in development and is a experimental feauture</h3>
+    <h3>Fixed the shutdown bug</h3>
+    <h3>Added Features and fixes</h3>
+    <h3>NotePad was added as a experimental feature</h3>
+    <h3>Fixed the power on and login screen so the colors are full screen</h3>
+    <h3>Added hibernation Mode</h3>
   </div>
   <div class="desktop" id="desktopdiv" style="display: none; position: relative; height: 100vh;">
     <div id="trashid" style="position: absolute; top: 20px; left: 20px; text-align: center; display: inline-block;">
@@ -117,8 +135,9 @@ data-html-ver="HTML5">
     <img src="/assets/images/trash.png" style="height: 35px; width: auto;" onclick="showTrash()">
     <img src="/assets/images/settings.png" style="height: 35px; width: auto;" onclick="showSettings()">
   </h3>
-  <h3 class="logout" onclick="logOut()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 15px; margin: 0; cursor: pointer;">/</h3>
-  <h3 class="shutdown" onclick="shutDown()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 23px; margin: 0; cursor: pointer;">0</h3>
+  <h3 class="logout" onclick="logOut()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 15px; margin: 0; cursor: pointer;">L</h3>
+  <h3 class="shutdown" onclick="shutDown()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 23px; margin: 0; cursor: pointer;">S</h3>
+   <h3 class="hibernate" onclick="hibernate()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 34px; margin: 0; cursor: pointer;">H</h3>
 </div>
 <div class="loggingoutscreen" id="loggingoutscreendiv" style="text-align: center; display: none;">
 <h3>Logging out please wait...</h3>
@@ -157,7 +176,8 @@ data-html-ver="HTML5">
 
 </style>
   <script>
-      setTimeout(function() { 
+      setTimeout(function() {
+        document.getElementById('internals').style.backgroundColor="#ADD8E6" 
         document.getElementById('loadingscreen').style.display = 'none';
         document.getElementById('logindiv').style.display = 'block';
       }, 3000); 
@@ -167,11 +187,14 @@ data-html-ver="HTML5">
     document.getElementById('desktopdiv').style.display='block';
     document.getElementById('taskbardiv').style.display='block';
     document.getElementById('windowslogo').style.display="block";
+    document.getElementById('newfeatures').style.display="block";
+    document.getElementById('internals').style.backgroundColor="white";
     
   }
   function showTrash(){
     document.getElementById('trashdiv').style.display='block';
     document.getElementById('menudiv').style.display="none";
+    document.getElementById("newfeatures").style.display ="none";
       
       }
   function exitNotepad(){
@@ -185,7 +208,11 @@ document.getElementById('loadingscreen').style.display = 'block';
 setTimeout(function(){
   document.getElementById('loadingscreen').style.display = 'none';
   document.getElementById('shutdownId').style.display = 'none';
+  document.getElementById('menudiv').style.display = 'none';
+  document.getElementById('taskbardiv').style.display = 'none';
+  document.getElementById('systemhasshutDown').style.display = 'none';
   document.getElementById('logindiv').style.display = 'block';
+  document.getElementById("newfeatures").style.display ="none";
 }, 3000);
   }
   function showmenu(){
@@ -199,6 +226,7 @@ setTimeout(function(){
   function showSettings(){
     document.getElementById('settingsid').style.display='block';
     document.getElementById('line1').style.display='block';
+    document.getElementById("newfeatures").style.display ="none";
   }
   function exitSettings(){
     document.getElementById('settingsid').style.display='none';
@@ -206,6 +234,7 @@ setTimeout(function(){
   }
   function showNotepad(){
     document.getElementById('notePad').style.display = 'block';
+    document.getElementById("newfeatures").style.display ="none";
   }
    function logOut(){
       document.getElementById('loggingoutscreendiv').style.display='block';
@@ -213,6 +242,7 @@ setTimeout(function(){
       document.getElementById('taskbardiv').style.display='none';
       document.getElementById('windowslogo').style.display='none';
       document.getElementById('menudiv').style.display='none';
+      document.getElementById("newfeatures").style.display ="none";
       setTimeout(function() { 
         document.getElementById('loggingoutscreendiv').style.display = 'none';
         document.getElementById('logindiv').style.display = 'block';
@@ -224,11 +254,29 @@ setTimeout(function(){
       document.getElementById('taskbardiv').style.display='none';
       document.getElementById('windowslogo').style.display='none';
       document.getElementById('menudiv').style.display='none';
+      document.getElementById("newfeatures").style.display ="none";
             setTimeout(function() { 
         document.getElementById('shutdownId').style.display = 'none';
       }, 3000); setTimeout(function(){document.getElementById('systemhasshutDown').style.display='block';}, 275);
     }
-    function backgroundRed(){
+    function hibernate() {
+      document.getElementById("hibernatehi").style.display="block";
+      document.getElementById("desktopdiv").style.display="none";
+      document.getElementById("menudiv").style.display="none";
+      document.getElementById("newfeatures").style.display ="none";
+      document.getElementById("taskbardiv").style.display= "none";
+        setTimeout(function() {
+          document.getElementById("hibernationmode").style.display="block";
+          document.getElementById("hibernatehi").style.display="none";
+        }, 3000);
+    }
+    function nohibernation(){ 
+      document.getElementById("hibernationmode").style.display="none";
+      document.getElementById("logindiv").style.display="block";
+      document.getElementById("internals").style.backgroundColor="#ADD8E6";
+    }
+    
+      function backgroundRed(){
       document.getElementById('internals').style.backgroundColor = 'red';
       document.getElementById('resetBack').style.display = 'block';
     } 
@@ -244,6 +292,9 @@ setTimeout(function(){
            setTimeout(function() { 
         document.getElementById('resetComplete').style.display = 'none';
       }, 375);
+    }
+    function closefeaturesandfixes(){
+      document.getElementById("newfeatures").style.display ="none";
     }
            
     dragElement(document.getElementById("trashid"));
