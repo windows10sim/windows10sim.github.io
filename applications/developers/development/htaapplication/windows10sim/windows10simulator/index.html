@@ -1,0 +1,513 @@
+
+
+<!--Made by Askedland https://youtube.com/@askedland-->
+<!DOCTYPE html>
+<html lang="en"
+data-win10-pub="Askedland"
+data-current-version="2.7.2"
+data-og-pub="Askedland"
+data-html-ver="HTML5">
+<!--These scripts which are sourced at assets/javascript may not be finished -->
+<script src="/assets/javascript/copyright.js"></script>
+<script src="/assets/javascript/welcomer.js"></script>
+  <head>
+    <meta name="author" content="Askedland, https://youtube.com/@askedland askedland_ on discord">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 10 Simulator</title>
+  </head>
+  <body id="internals" style="background-color: black">
+  <!--The notepad is a experimental feature currently its not working-->
+  <!--add a login screen which will dispear after pressing login-->
+  <!--add a background for better looks for the blocky version windows 10 simulation-->
+  <!--
+
+
+
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||Updated on 09.07 21:30:56|||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+||||||||Version: 2.7.2|||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||Version Codename||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||CodeName: LessThanGreater|||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||License|||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+||||||GNUPUBLICLICNSE3.0|||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+||||||||||Hosting||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+||||||||Github Pages|||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+|||||||||||||||||||||||||||||||
+
+  
+  -->
+  <div class="loading" id="loadingscreen" style="display: block; background-color: black; height: 100%  width: 100vw; height: 100vh;">
+    <h1 style="color: white; text-align: center; margin: 277px">Loading Windows...</h1>
+  </div>
+  <div class="shutdownclass" id="shutdownId" style="display: none; background-color: blue; height: 100%  width: 100vw; height: 100vh;">
+    <h1 style="color: white; text-align: center; margin: 277px">Shutting down please wait...</h1>
+  </div>
+  <div class="osshutdown" id="systemhasshutDown" style="text-align: center; justify-items: center; display: none;">
+    <h2 style="text-align: center;">The system has been shutdown</h2>
+    <button onclick="turnOn()">Turn On</button>
+  </div>
+  <div class="goingtohibernate" id="hibernatehi" style="display: none; background-color: blue; height: 100%  width: 100vw; height: 100vh;">
+    <h1 style="color: white; text-align: center; margin: 277px">Going into hibernation please wait...</h1>
+  </div>
+  <div class="oshibernation" id="hibernationmode" style="text-align: center; justify-items: center; display: none;">
+    <h2>System has been set in Hibernation mode</h2>
+    <button onclick="nohibernation()">Turn on</button>
+  </div>
+  <noscript style="text-align: center; color: white;">
+    Javascript is disabled, please enable javascript to run this application
+  </noscript>
+  <div class="loginscreen" style="background-color: #ADD8E6; width: 100vw; height: 100vh; display: none;" id="logindiv">
+    <!--add the name "User"-->
+    <h2 style="text-align: center;  margin-top: 277px">User</h2>
+    <!--adding a button-->
+    <div class="logonbutton" style="display: flex; justify-content: center;">
+    <button onclick="login()" style="background: #D3D3D3; color: black; border: white; align-items: center; display: block; margin: 15 auto 0 auto; padding: 10px 16px;">Log In</button>
+    </div>
+  </div>
+  <div class="addedfeatures" id="newfeatures" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; height: 300px;  overflow-y: auto; overflow-x: hidden;">
+    <button onclick="closefeaturesandfixes()" style="background-color: gray; border: none; margin-left: 320px;">X</button>
+    <h1>Features and Fixes</h1>
+    <h2>4th Sept. 2026</h3>
+    <h3>Hibernation mode is currently in development and is a experimental feauture</h3>
+    <h3>Fixed the shutdown bug</h3>
+    <h3>Added Features and fixes</h3>
+    <h3>NotePad was added as a experimental feature</h3>
+    <h3>Fixed the power on and login screen so the colors are full screen</h3>
+    <h3>Added hibernation Mode</h3>
+  </div>
+  <div class="desktop" id="desktopdiv" style="display: none; position: relative; height: 100vh;">
+    <div id="trashid" style="position: absolute; top: 20px; left: 20px; text-align: center; display: inline-block;">
+      <img src="/assets/images/trash.png" style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;" ondblclick="showTrash()">
+      <h5 style="margin: 0; cursor: pointer;" ondblclick="showTrash()">Trash Bin</h5>
+    </div>
+    <div class="settings" id="settingsdiv" style="position: absolute; top: 110px; left: 24px; text-align: center; display: inline-block;">
+  <img src="/assets/images/settings.png" ondblclick="showSettings()"style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;">
+  <h5 style="margin: 0; cursor: pointer;" ondblclick="showSettings()">Settings</h5>
+    </div>
+    <div class="notepad" id="notepaddiv" style="position: absolute; top: 199px; left: 24px; text-align: center; display: inline-block;">
+      <img src="/assets/images/notepad.png" ondblclick="showNotepad()" style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;">
+      <h5 style="margin: 0; cursor: pointer;" ondblclick="showNotepad()">Notepad</h5>
+    </div>
+    <div class="sttngs" id="settingsid" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+      <h4 id="settingsexit" style="text-align: right; cursor: pointer;" onclick="exitSettings()">X</h4>
+      <h6 id="resetBack" style="color: black; text-align: left; cursor: pointer; display: none;" onclick="resetbacktoFactory()">Reset Back to factory</h6>|
+      <h6 id="resetComplete" style="display: none; text-align: left;">Reset Complete</h6>
+      <button style="background-color: red; height: 52px; width: 82px; cursor: pointer;" onclick="backgroundRed()">   </button>
+      <button style="background-color: orange; height: 52px; width: 82px; cursor: pointer" onclick="backgroundOrange()">   </button>
+  <div style="position: absolute; top: 40px; left: 30px; font-weight: bold; font-size: 16px;">User</div>
+  <div style="position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-weight: bold; font-size: 16px; white-space: nowrap;">user@example.com
+  </div>
+    </div>
+    <hr style="display: none;" id="line1">
+  </div>
+  <div class="trash" id="trashdiv" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+    <h4 id="trashexit" onclick="exitTrash()" style="text-align: right; cursor: pointer;">X</h4>
+    <h5>Trash bin is empty</h5>
+  </div>
+  <div class="notepad" id="notePad" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+    <h4 id="exitNotepad" onclick="exitNotepad()" style="text-align: right; cursor: pointer;">X</h4>
+    <textarea placeholder="Start typing..." style="flex: 1; padding: 15px; font-size: 16px; font-family: monospace; border: none; outline: none; resize: none; border-radius: 4px; box-sizing: border-box; background: white;"></textarea>
+</div>
+  </div>
+ <div class="taskbar" id="taskbardiv" style="position: fixed; bottom: 0; left: 0; background: #202020; height: 40px; width: 100%; display: none; align-items: center; padding: 0 10px; box-sizing: border-box; z-index: 9999;">
+  <img src="/assets/images/windowslogo.png" id="windowslogo" style="display:none; width: 24px; height: 24px; cursor: pointer;" onclick="showmenu()">
+</div>
+<div class="menu" id="menudiv" style="display: none; position: fixed; bottom: 40px; left: 0; background: #202020; color: white; width: 300px; height: 400px; padding: 15px; box-sizing: border-box; font-family: sans-serif; border-top-right-radius: 4px; border: 1px solid #3a3a3a; z-index: 9999;">
+  <h3 style="margin: 0; font-size: 14px; font-weight: normal; color: #cccccc;">
+    <img src="/assets/images/trash.png" style="height: 35px; width: auto;" onclick="showTrash()">
+    <img src="/assets/images/settings.png" style="height: 35px; width: auto;" onclick="showSettings()">
+  </h3>
+  <h3 class="logout" onclick="logOut()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 15px; margin: 0; cursor: pointer;">L</h3>
+  <h3 class="shutdown" onclick="shutDown()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 23px; margin: 0; cursor: pointer;">S</h3>
+   <h3 class="hibernate" onclick="hibernate()" style="font-size: 13px; color: #ffffff; position: absolute; bottom: 15px; left: 34px; margin: 0; cursor: pointer;">H</h3>
+</div>
+<div class="loggingoutscreen" id="loggingoutscreendiv" style="text-align: center; display: none;">
+<h3>Logging out please wait...</h3>
+</div>
+<style>
+   .draggable-window {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 150px;
+      height: 120px;
+      background-color: #2980b9;
+      color: white;
+      font-family: sans-serif;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      user-select: none; 
+   }
+     html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; 
+        box-sizing: border-box;
+     }
+     .logindiv, .loadingscreen {
+        background-color: #ADD8E6; 
+        width: 100vw; 
+        height: 100vh; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;
+      }
+
+</style>
+  <script>
+      setTimeout(function() {
+        document.getElementById('internals').style.backgroundColor="#ADD8E6" 
+        document.getElementById('loadingscreen').style.display = 'none';
+        document.getElementById('logindiv').style.display = 'block';
+      }, 3000); 
+
+  function login(){
+    document.getElementById('logindiv').style.display='none';   
+    document.getElementById('desktopdiv').style.display='block';
+    document.getElementById('taskbardiv').style.display='block';
+    document.getElementById('windowslogo').style.display="block";
+    document.getElementById('newfeatures').style.display="block";
+    document.getElementById('internals').style.backgroundColor="white";
+    
+  }
+  function showTrash(){
+    document.getElementById('trashdiv').style.display='block';
+    document.getElementById('menudiv').style.display="none";
+    document.getElementById("newfeatures").style.display ="none";
+      
+      }
+  function exitNotepad(){
+   document.getElementById('notePad').style.display = 'none';
+  }
+  function exitTrash(){
+    document.getElementById('trashdiv').style.display='none'
+  }
+  function turnOn(){
+document.getElementById('loadingscreen').style.display = 'block';
+setTimeout(function(){
+  document.getElementById('loadingscreen').style.display = 'none';
+  document.getElementById('shutdownId').style.display = 'none';
+  document.getElementById('menudiv').style.display = 'none';
+  document.getElementById('taskbardiv').style.display = 'none';
+  document.getElementById('systemhasshutDown').style.display = 'none';
+  document.getElementById('logindiv').style.display = 'block';
+  document.getElementById("newfeatures").style.display ="none";
+}, 3000);
+  }
+  function showmenu(){
+    var menu = document.getElementById('menudiv');
+    if (menu.style.display === "block") {
+      menu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+    }
+  } 
+  function showSettings(){
+    document.getElementById('settingsid').style.display='block';
+    document.getElementById('line1').style.display='block';
+    document.getElementById("newfeatures").style.display ="none";
+  }
+  function exitSettings(){
+    document.getElementById('settingsid').style.display='none';
+    document.getElementById('line1').style.display='none';
+  }
+  function showNotepad(){
+    document.getElementById('notePad').style.display = 'block';
+    document.getElementById("newfeatures").style.display ="none";
+  }
+   function logOut(){
+      document.getElementById('loggingoutscreendiv').style.display='block';
+      document.getElementById('desktopdiv').style.display='none';
+      document.getElementById('taskbardiv').style.display='none';
+      document.getElementById('windowslogo').style.display='none';
+      document.getElementById('menudiv').style.display='none';
+      document.getElementById("newfeatures").style.display ="none";
+      setTimeout(function() { 
+        document.getElementById('loggingoutscreendiv').style.display = 'none';
+        document.getElementById('logindiv').style.display = 'block';
+      }, 3000); 
+    }
+    function shutDown(){
+      document.getElementById('shutdownId').style.display='block';
+      document.getElementById('desktopdiv').style.display='none';
+      document.getElementById('taskbardiv').style.display='none';
+      document.getElementById('windowslogo').style.display='none';
+      document.getElementById('menudiv').style.display='none';
+      document.getElementById("newfeatures").style.display ="none";
+            setTimeout(function() { 
+        document.getElementById('shutdownId').style.display = 'none';
+      }, 3000); setTimeout(function(){document.getElementById('systemhasshutDown').style.display='block';}, 275);
+    }
+    function hibernate() {
+      document.getElementById("hibernatehi").style.display="block";
+      document.getElementById("desktopdiv").style.display="none";
+      document.getElementById("menudiv").style.display="none";
+      document.getElementById("newfeatures").style.display ="none";
+      document.getElementById("taskbardiv").style.display= "none";
+        setTimeout(function() {
+          document.getElementById("hibernationmode").style.display="block";
+          document.getElementById("hibernatehi").style.display="none";
+        }, 3000);
+    }
+    function nohibernation(){ 
+      document.getElementById("hibernationmode").style.display="none";
+      document.getElementById("logindiv").style.display="block";
+      document.getElementById("internals").style.backgroundColor="#ADD8E6";
+    }
+    
+      function backgroundRed(){
+      document.getElementById('internals').style.backgroundColor = 'red';
+      document.getElementById('resetBack').style.display = 'block';
+    } 
+     function backgroundOrange(){
+      document.getElementById('internals').style.backgroundColor = 'orange';
+      document.getElementById('resetBack').style.display = 'block';
+    } 
+
+    function resetbacktoFactory(){
+      document.getElementById('resetBack').style.display = 'none';
+      document.getElementById('internals').style.backgroundColor = 'white';
+      document.getElementById('resetComplete').style.display = 'block';
+           setTimeout(function() { 
+        document.getElementById('resetComplete').style.display = 'none';
+      }, 375);
+    }
+    function closefeaturesandfixes(){
+      document.getElementById("newfeatures").style.display ="none";
+    }
+           
+    dragElement(document.getElementById("trashid"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    dragElement(document.getElementById("trashdiv"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    dragElement(document.getElementById("settingsdiv"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+        dragElement(document.getElementById("settingsid"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+ dragElement(document.getElementById("notepaddiv"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    dragElement(document.getElementById("notePad"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+  </script>
+  </head>
+</html>
