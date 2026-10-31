@@ -1,10 +1,8 @@
-
-
 <!--Made by Askedland https://youtube.com/@askedland-->
 <!DOCTYPE html>
 <html lang="en"
 data-win10-pub="Askedland"
-data-current-version="2.7.2"
+data-current-version="2.8.2"
 data-og-pub="Askedland"
 data-html-ver="HTML5">
 <!--These scripts which are sourced at assets/javascript may not be finished -->
@@ -30,7 +28,7 @@ data-html-ver="HTML5">
 |||Updated on 09.07 21:30:56|||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
-||||||||Version: 2.7.2|||||||||
+||||||||Version: 2.8.2|||||||||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
 |||||||Version Codename||||||||
@@ -86,6 +84,11 @@ data-html-ver="HTML5">
   <div class="addedfeatures" id="newfeatures" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; height: 300px;  overflow-y: auto; overflow-x: hidden;">
     <button onclick="closefeaturesandfixes()" style="background-color: gray; border: none; margin-left: 320px;">X</button>
     <h1>Features and Fixes</h1>
+    <h2>31st Oct. 2026</h2>
+    <h3>NOW RELEASED!!</h3>
+    <h3>Added a web app download it on <a href="https://windows10sim.github.io/download/webapp/">https://windows10sim.github.io/download/webapp/</a> You will need a internet connection to use the web app</h3>
+    <h3>Added so the hibernation mode background is fully blue</h3>
+    <h3>Added a new feature</h3>
     <h2>4th Sept. 2026</h3>
     <h3>Hibernation mode is currently in development and is a experimental feauture</h3>
     <h3>Fixed the shutdown bug</h3>
@@ -109,15 +112,15 @@ data-html-ver="HTML5">
     </div>
     <div class="sttngs" id="settingsid" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
       <h4 id="settingsexit" style="text-align: right; cursor: pointer;" onclick="exitSettings()">X</h4>
-      <h6 id="resetBack" style="color: black; text-align: left; cursor: pointer; display: none;" onclick="resetbacktoFactory()">Reset Back to factory</h6>|
+      <h6 id="resetBack" style="color: black; text-align: left; cursor: pointer; display: none;" onclick="resetbacktoFactory()">Reset Back to factory</h6>
       <h6 id="resetComplete" style="display: none; text-align: left;">Reset Complete</h6>
       <button style="background-color: red; height: 52px; width: 82px; cursor: pointer;" onclick="backgroundRed()">   </button>
       <button style="background-color: orange; height: 52px; width: 82px; cursor: pointer" onclick="backgroundOrange()">   </button>
+      <button style="background-color: yellow; height: 52px; width: 82px; cursor: pointer" onclick="backgroundYellow()"></button>
   <div style="position: absolute; top: 40px; left: 30px; font-weight: bold; font-size: 16px;">User</div>
   <div style="position: absolute; top: 40px; left: 50%; transform: translateX(-50%); font-weight: bold; font-size: 16px; white-space: nowrap;">user@example.com
   </div>
     </div>
-    <hr style="display: none;" id="line1">
   </div>
   <div class="trash" id="trashdiv" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
     <h4 id="trashexit" onclick="exitTrash()" style="text-align: right; cursor: pointer;">X</h4>
@@ -226,7 +229,6 @@ setTimeout(function(){
   } 
   function showSettings(){
     document.getElementById('settingsid').style.display='block';
-    document.getElementById('line1').style.display='block';
     document.getElementById("newfeatures").style.display ="none";
   }
   function exitSettings(){
@@ -266,9 +268,11 @@ setTimeout(function(){
       document.getElementById("menudiv").style.display="none";
       document.getElementById("newfeatures").style.display ="none";
       document.getElementById("taskbardiv").style.display= "none";
+      document.getElementById("internals").style.backgroundColor = "blue";
         setTimeout(function() {
           document.getElementById("hibernationmode").style.display="block";
           document.getElementById("hibernatehi").style.display="none";
+          document.getElementById("internals").style.backgroundColor = "white";
         }, 3000);
     }
     function nohibernation(){ 
@@ -285,6 +289,11 @@ setTimeout(function(){
       document.getElementById('internals').style.backgroundColor = 'orange';
       document.getElementById('resetBack').style.display = 'block';
     } 
+
+    function backgroundYellow(){
+      document.getElementById("internals").style.backgroundColor = "yellow";
+      document.getElementById("resetBack").style.display = "block";
+    }
 
     function resetbacktoFactory(){
       document.getElementById('resetBack').style.display = 'none';
