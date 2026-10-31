@@ -87,7 +87,7 @@ data-html-ver="HTML5">
     <h1>Features and Fixes</h1>
     <h2>31st Oct. 2026</h2>
     <h3>NOW RELEASED!!</h3>
-    <h3>Added a web app download it on <a href="https://windows10sim.github.io/download/webapp/">https://windows10sim.github.io/download/webapp/</a> You will need a internet connection to use the web app</h3>
+    <h3>Added a web app download it on <a onclick="showError()" style="cursor: pointer; text-decoration: underline; color: blue;">https://windows10sim.github.io/download/webapp/</a> You will need a internet connection to use the web app</h3>
     <h3>Added a download web app button</h3>
     <h3>Added so the hibernation mode background is fully blue</h3>
     <h3>Fixed the no script</h3>
@@ -100,6 +100,13 @@ data-html-ver="HTML5">
     <h3>NotePad was added as a experimental feature</h3>
     <h3>Fixed the power on and login screen so the colors are full screen</h3>
     <h3>Added hibernation Mode</h3>
+  </div>
+  <div class="error" id="errordiv" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: red; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+  <h4 onclick="closeError()" style="cursor: pointer; background-color: red; border: none; margin-left: 320px;">X</h4>
+  <h2>ERROR!!!</h2>
+   <h3>You have already downloaded this app</h3>
+   <h3>This error shows so the user doesn't click it by accident and cannot use the app unless its reloaded</h3>
+   <h5><strong>Error Code:</strong> APP_INSTALLED</h5>
   </div>
   <div class="desktop" id="desktopdiv" style="display: none; position: relative; height: 100vh;">
     <div id="trashid" style="position: absolute; top: 20px; left: 28px; text-align: center; display: inline-block;">
@@ -311,6 +318,14 @@ setTimeout(function(){
     }
     function closefeaturesandfixes(){
       document.getElementById("newfeatures").style.display ="none";
+    }
+
+    function showError(){ 
+      document.getElementById("errordiv").style.display="block";
+    }
+    
+    function closeError(){
+      document.getElementById("errordiv").style.display="none";
     }
 
     document.getElementById("no-js").style.display = "none";
