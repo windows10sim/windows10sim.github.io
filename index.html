@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en"
 data-win10-pub="Askedland"
-data-current-version="2.9.2"
+data-current-version="2.9.4"
 data-og-pub="Askedland"
 data-html-ver="HTML5">
 <!--These scripts which are sourced at assets/javascript may not be finished -->
@@ -28,7 +28,7 @@ data-html-ver="HTML5">
 |||Updated on 09.07 21:30:56|||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
-||||||||Version: 2.9.2|||||||||
+||||||||Version: 2.9.4|||||||||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
 |||||||Version Codename||||||||
@@ -88,6 +88,7 @@ data-html-ver="HTML5">
     <h2>31st Oct. 2026</h2>
     <h3>NOW RELEASED!!</h3>
     <h3>Added a web app download it on <a href="https://windows10sim.github.io/download/webapp/">https://windows10sim.github.io/download/webapp/</a> You will need a internet connection to use the web app</h3>
+    <h3>Added a download web app button</h3>
     <h3>Added so the hibernation mode background is fully blue</h3>
     <h3>Fixed the no script</h3>
     <h3>Added the yellow color</h3>
@@ -101,17 +102,21 @@ data-html-ver="HTML5">
     <h3>Added hibernation Mode</h3>
   </div>
   <div class="desktop" id="desktopdiv" style="display: none; position: relative; height: 100vh;">
-    <div id="trashid" style="position: absolute; top: 20px; left: 20px; text-align: center; display: inline-block;">
+    <div id="trashid" style="position: absolute; top: 20px; left: 28px; text-align: center; display: inline-block;">
       <img src="/assets/images/trash.png" style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;" ondblclick="showTrash()">
       <h5 style="margin: 0; cursor: pointer;" ondblclick="showTrash()">Trash Bin</h5>
     </div>
-    <div class="settings" id="settingsdiv" style="position: absolute; top: 110px; left: 24px; text-align: center; display: inline-block;">
+    <div class="settings" id="settingsdiv" style="position: absolute; top: 110px; left: 33px; text-align: center; display: inline-block;">
   <img src="/assets/images/settings.png" ondblclick="showSettings()"style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;">
   <h5 style="margin: 0; cursor: pointer;" ondblclick="showSettings()">Settings</h5>
     </div>
-    <div class="notepad" id="notepaddiv" style="position: absolute; top: 199px; left: 24px; text-align: center; display: inline-block;">
+    <div class="notepad" id="notepaddiv" style="position: absolute; top: 199px; left: 33px; text-align: center; display: inline-block;">
       <img src="/assets/images/notepad.png" ondblclick="showNotepad()" style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;">
       <h5 style="margin: 0; cursor: pointer;" ondblclick="showNotepad()">Notepad</h5>
+    </div>
+       <div class="downloadButton" id="downloadButtondiv" style="position: absolute; top: 290px; left: 0px; text-align: center; display: inline-block;">
+      <img src="/assets/images/downloadbutton.png" ondblclick="startDownload()" style="width: 43px; height: 43px; display: block; margin: 0 auto; cursor: pointer;">
+      <h5 style="margin: 0; cursor: pointer;" ondblclick="startDownload()">Download Web App</h5>
     </div>
     <div class="sttngs" id="settingsid" style="display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
       <h4 id="settingsexit" style="text-align: right; cursor: pointer;" onclick="exitSettings()">X</h4>
@@ -220,6 +225,7 @@ setTimeout(function(){
   document.getElementById('systemhasshutDown').style.display = 'none';
   document.getElementById('logindiv').style.display = 'block';
   document.getElementById("newfeatures").style.display ="none";
+  document.getElementById("internals").style.backgroundColor="#ADD8E6";
 }, 3000);
   }
   function showmenu(){
@@ -261,9 +267,10 @@ setTimeout(function(){
       document.getElementById('windowslogo').style.display='none';
       document.getElementById('menudiv').style.display='none';
       document.getElementById("newfeatures").style.display ="none";
+      document.getElementById("internals").style.backgroundColor="blue";
             setTimeout(function() { 
         document.getElementById('shutdownId').style.display = 'none';
-      }, 3000); setTimeout(function(){document.getElementById('systemhasshutDown').style.display='block';}, 275);
+      }, 3000); setTimeout(function(){document.getElementById('systemhasshutDown').style.display='block'; document.getElementById("internals").style.backgroundColor="white";}, 275);
     }
     function hibernate() {
       document.getElementById("hibernatehi").style.display="block";
@@ -308,6 +315,10 @@ setTimeout(function(){
     }
     function closefeaturesandfixes(){
       document.getElementById("newfeatures").style.display ="none";
+    }
+
+    function startDownload(){
+      window.location.href = "/download/webapp";
     }
 
     document.getElementById("no-js").style.display = "none";
@@ -488,6 +499,76 @@ setTimeout(function(){
       }
     }
     dragElement(document.getElementById("notePad"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+     dragElement(document.getElementById("notepaddiv"));
+    function dragElement(elmnt) {
+      if (!elmnt) return; 
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      
+      if (document.getElementById(elmnt.id + "Header")) {
+        document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+  
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+      }
+
+      function elementDrag(e) {
+        e.preventDefault()
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    dragElement(document.getElementById("downloadButtondiv"));
     function dragElement(elmnt) {
       if (!elmnt) return; 
       let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
