@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en"
 data-win10-pub="Askedland"
-data-current-version="2.8.2"
+data-current-version="2.9.2"
 data-og-pub="Askedland"
 data-html-ver="HTML5">
 <!--These scripts which are sourced at assets/javascript may not be finished -->
@@ -28,7 +28,7 @@ data-html-ver="HTML5">
 |||Updated on 09.07 21:30:56|||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
-||||||||Version: 2.8.2|||||||||
+||||||||Version: 2.9.2|||||||||
 |||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||
 |||||||Version Codename||||||||
@@ -53,6 +53,9 @@ data-html-ver="HTML5">
 
   
   -->
+  <div class="noscript" id="no-js" style="display: block; color: white;">
+    <h2>Windows 10 Simulator requires javascript to run all the needed javascript files, and make the simulator functionable</h2>
+  </div>
   <div class="loading" id="loadingscreen" style="display: block; background-color: black; height: 100%  width: 100vw; height: 100vh;">
     <h1 style="color: white; text-align: center; margin: 277px">Loading Windows...</h1>
   </div>
@@ -70,9 +73,7 @@ data-html-ver="HTML5">
     <h2>System has been set in Hibernation mode</h2>
     <button onclick="nohibernation()">Turn on</button>
   </div>
-  <noscript style="text-align: center; color: white;">
-    Javascript is disabled, please enable javascript to run this application
-  </noscript>
+
   <div class="loginscreen" style="background-color: #ADD8E6; width: 100vw; height: 100vh; display: none;" id="logindiv">
     <!--add the name "User"-->
     <h2 style="text-align: center;  margin-top: 277px">User</h2>
@@ -88,6 +89,8 @@ data-html-ver="HTML5">
     <h3>NOW RELEASED!!</h3>
     <h3>Added a web app download it on <a href="https://windows10sim.github.io/download/webapp/">https://windows10sim.github.io/download/webapp/</a> You will need a internet connection to use the web app</h3>
     <h3>Added so the hibernation mode background is fully blue</h3>
+    <h3>Fixed the no script</h3>
+    <h3>Added the yellow color</h3>
     <h3>Added a new feature</h3>
     <h2>4th Sept. 2026</h3>
     <h3>Hibernation mode is currently in development and is a experimental feauture</h3>
@@ -306,6 +309,8 @@ setTimeout(function(){
     function closefeaturesandfixes(){
       document.getElementById("newfeatures").style.display ="none";
     }
+
+    document.getElementById("no-js").style.display = "none";
            
     dragElement(document.getElementById("trashid"));
     function dragElement(elmnt) {
