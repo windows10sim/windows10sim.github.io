@@ -1,0 +1,66 @@
+<!--Made by Askedland youtube.com/@askedland-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="author" content="Askedland, https://youtube.com/@askedland askedland_ on discord">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 10 Simulator</title>
+  </head>
+  <!--add a login screen which will dispear after pressing login-->
+  <!--add a background for better looks for the blocky version windows 10 simulation-->
+  <div class="loginscreen" style="background-color: #ADD8E6; width: max; height: max;" id="logindiv">
+    <!--add the name "User"-->
+    <h2 style="text-align: center;  margin-top: 277px">User</h2>
+    <!--adding a button-->
+    <div class="logonbutton" style="display: flex; justify-content: center;">
+    <button onclick="login()" style="background: #D3D3D3; color: black; border: white; align-items: center; display: block; margin: 15 auto 0 auto; padding: 10px 16px;">Log In</button>
+    </div>
+  </div>
+  <div class="desktop" id="desktopdiv" style="display: none;">
+    <img src="/assets/images/trash.png" style="width: 43px; height: 43px; display: block;" onclick="showTrash()">
+ <h5 style="margin: 0;" onclick="showTrash()">Trash Bin</h5>
+    </div>
+  <div class="trash" id="trashdiv" style="display: none; border: 2px; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; display: none; border: 2px solid #000000; border-radius: 5px; background-color: gray; text-align: center; width: 400px; height: 300px; padding: 20px; box-sizing: border-box; font-family: sans-serif; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <h4 id="trashexit" onclick="exitTrash()" style="text-align: right;">X</h4>
+    <h5>Trash bin is empty</h5>
+  </div>
+ <div class="taskbar" id="taskbardiv" style="position: fixed; bottom: 0; left: 0; background: #202020; height: 40px; width: 100%; display: none; align-items: center; padding: 0 10px; box-sizing: border-box;">
+  <img src="/assets/images/windowslogo.png" id="windowslogo" style="display:none; width: 24px; height: 24px; cursor: pointer;" onclick="showmenu()">
+</div>
+<div class="menu" id="menudiv" style="display: none; position: fixed; bottom: 40px; left: 0; background: #202020; color: white; width: 300px; height: 400px; padding: 15px; box-sizing: border-box; font-family: sans-serif; border-top-right-radius: 4px; border: 1px solid #3a3a3a; z-index: 9999;">
+  <h3 style="margin: 0; font-size: 14px; font-weight: normal; color: #cccccc;">oops! this is not a feature yet...</h3>
+</div>
+  <script>
+  function login(){
+  document.getElementById('logindiv')
+    .style.display='none';   
+     document.getElementById('desktopdiv')
+    .style.display='block';
+    document.getElementById('taskbardiv')
+    .style.display='block';
+    document.getElementById('windowslogo')
+    .style.display="block";
+  }
+  function showTrash(){
+    document.getElementById('trashdiv')
+    .style.display='block';
+  }
+  function exitTrash(){
+    document.getElementById('trashdiv')
+    .style.display='none'
+  }
+  function showmenu(){
+    document.getElementById('menudiv')
+    .style.display="block"
+  }   
+   function showmenu(){
+    var menu = document.getElementById('menudiv');
+    if (menu.style.display === "block") {
+      menu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+    }
+  }   
+      </script>
+</html>
